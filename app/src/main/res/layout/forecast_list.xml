@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="com.rim.tramforecast.R" />
+        <variable
+            name="viewModel"
+            type="com.rim.tramforecast.data.ForecastViewModel" />
+        <variable
+            name="tramItemBinding"
+            type="me.tatarka.bindingcollectionadapter2.ItemBinding" />
+
+    </data>
+
+
+<LinearLayout
+
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/showdescriptioncontenttitle"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:background="#68489A"
+
+        >
+
+        <TextView
+            android:id="@+id/stopview"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:text='@{viewModel.forecast.stop +" "+viewModel.directions.name}'
+            android:textColor="@android:color/white"
+             />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/text_layout"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:weightSum="1"
+        android:background="@android:color/white">
+
+        <TextView
+            android:id="@+id/due"
+            android:layout_width="0dp"
+            android:layout_weight="0.44"
+            android:layout_height="wrap_content"
+            android:text="Due"
+            android:textSize="20dp"
+            android:gravity="left"
+
+            android:textColor="@android:color/black"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
+
+        <TextView
+            android:id="@+id/destination"
+            android:layout_width="0dp"
+            android:layout_weight="0.56"
+            android:textSize="20dp"
+            android:textColor="@android:color/black"
+            android:layout_height="wrap_content"
+            android:text="Destination"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="left"/>
+    </LinearLayout>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        app:refreshing="@{viewModel.isLoading}">
+
+
+
+        <android.support.v7.widget.RecyclerView
+
+            android:id="@+id/tramView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:itemBinding="@{tramItemBinding}"
+            app:items="@{viewModel.trams}" />
+
+
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+    <Button
+        android:id="@+id/refresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/tram"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:gravity="center"
+         />
+
+    <TextView
+        android:id="@+id/refreshtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_marginTop="15dp"
+        android:textSize="20dp"
+        android:text="Click to Refresh" />
+
+</LinearLayout>
+</layout>
